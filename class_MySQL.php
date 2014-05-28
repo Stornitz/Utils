@@ -25,6 +25,6 @@ class MySQL {
 
 		$req = $this->pdo->prepare($query);
 		$req->execute($params);
-		return $req->fetchAll();;
+		return $req->fetchAll();
 	}
 }
