@@ -21,7 +21,7 @@ class MySQL {
 	}
 
 	public function query($query, $params = array()) {
-		if(empty($this->pdo)) return Array('error' => 'Not connected');
+		if(empty($this->pdo)) die('SQL Error : Not connected');
 
 		$req = $this->pdo->prepare($query);
 		$req->execute($params);
