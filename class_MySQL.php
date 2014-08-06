@@ -7,7 +7,7 @@ class MySQL {
 
 	private $pdo = null;
 
-	public function connect() {
+	public function __construct() {
 		try
 		{
 			$pdo = new PDO('mysql:host='.$this->host.';dbname='.$this->dbname, $this->user, $this->password);
@@ -25,6 +25,16 @@ class MySQL {
 
 		$req = $this->pdo->prepare($query);
 		$req->execute($params);
-		return $req->fetchAll();
+		$data = $req->fetchAll();
+		$req->closeCursor();
+		return $data;
+	}
+
+	public function insert($query, $params = array()) {
+		if(empty($this->pdo)) die('SQL Error : Not connected');
+
+		$req = $this->pdo->prepare($query);
+		$req->execute($params);
+		$req->closeCursor();
 	}
 }
